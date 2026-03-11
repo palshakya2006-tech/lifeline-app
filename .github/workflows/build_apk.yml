@@ -4,7 +4,7 @@ on:
   push:
     tags:
       - 'v*'
-  workflow_dispatch:   # allows manual trigger from GitHub Actions tab
+  workflow_dispatch:
 
 jobs:
   build-apk:
@@ -25,40 +25,71 @@ jobs:
         with:
           flutter-version: '3.27.0'
           channel: 'stable'
+          cache: true
+
+      - name: Create google-services.json
+        run: |
+          cat > android/app/google-services.json << 'EOF'
+          {
+            "project_info": {
+              "project_number": "176912889439",
+              "project_id": "lifeline-61f28",
+              "storage_bucket": "lifeline-61f28.firebasestorage.app"
+            },
+            "client": [
+              {
+                "client_info": {
+                  "mobilesdk_app_id": "1:176912889439:android:84732855c955af31e7cdea",
+                  "android_client_info": {
+                    "package_name": "com.example.lifeline"
+                  }
+                },
+                "oauth_client": [
+                  {
+                    "client_id": "176912889439-mc5qkr3ufddt9il3mnfdbvsqj4asf66k.apps.googleusercontent.com",
+                    "client_type": 3
+                  }
+                ],
+                "api_key": [
+                  {
+                    "current_key": "AIzaSyDr_T13o1XMp_XMLKUwoA9WGtJhHiSStEo"
+                  }
+                ],
+                "services": {
+                  "appinvite_service": {
+                    "other_platform_oauth_client": []
+                  }
+                }
+              }
+            ],
+            "configuration_version": "1"
+          }
+          EOF
 
       - name: Get dependencies
         run: flutter pub get
 
       - name: Build release APK
-        run: flutter build apk --release --split-per-abi
+        run: flutter build apk --release
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: lifeline-apk
-          path: build/app/outputs/flutter-apk/*.apk
+          name: lifeline-release-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
 
       - name: Create GitHub Release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
-          files: build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
+          files: build/app/outputs/flutter-apk/app-release.apk
           name: LifeLine ${{ github.ref_name }}
           body: |
-            ## LifeLine ${{ github.ref_name }}
+            ## LifeLine ${{ github.ref_name }} - Care Before Crisis
 
-            ### 📱 Download
-            Download the APK below and install on your Android device.
-
-            ### What's new
-            - Full Firebase Auth + Firestore integration
-            - 10+ health features
-            - Emergency SOS with GPS
-            - Health Wallet QR code
-
-            ### Install Instructions
-            1. Download `app-arm64-v8a-release.apk`
-            2. Enable **Unknown Sources** in Android Settings
-            3. Install and create your account
+            ### Install on Android
+            1. Download app-release.apk below
+            2. Go to Settings > Security > Install Unknown Apps > Enable
+            3. Open the APK and tap Install
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
