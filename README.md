@@ -244,9 +244,12 @@ LifeLine was built for a national health-tech hackathon targeting:
 
 ---
 
-## 👤 Author
+## 👤 Authors
 
-**Saikat Pal** · [@palshakya2006-tech](https://github.com/palshakya2006-tech)
+**Tamohar Das** · [@Tamohar20](https://github.com/Tamohar20)
+**Saikat Dey** · [@saikat12april](https://github.com/saikat12april)
+**Shankharav Pal** · [@palshakya2006-tech](https://github.com/palshakya2006-tech)
+**Debarjun Chatterjee** · [@debxarjun](https://github.com/debxarjun)
 
 Built with ❤️ using Flutter, Firebase, and a lot of caffeine.
 
