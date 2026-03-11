@@ -1,0 +1,44 @@
+name: lifeline
+description: "LifeLine - Your Personal Health Companion"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.11.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Firebase
+  firebase_core: ^3.0.0
+  firebase_auth: ^5.0.0
+  google_sign_in: ^6.0.0
+  cloud_firestore: ^5.0.0
+
+  # Utilities
+  url_launcher: ^6.3.2
+  geolocator: ^13.0.0
+  shared_preferences: ^2.2.2
+  http: ^1.2.0
+  qr_flutter: ^4.1.0        # QR Code generation for Health Wallet
+
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: "^0.13.1"
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/indian_medicine_data.json
+    - assets/lifeline_logo.png
+    - assets/lifeline_logo1.png
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path : "assets/lifeline_logo.png"
