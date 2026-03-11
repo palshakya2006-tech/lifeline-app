@@ -180,7 +180,7 @@ dependencies:
 
 ### Android APK
 
-> **[⬇️ Download LifeLine v1.0 APK](releases/lifeline-v1.0.apk)**
+> > **[⬇️ Download LifeLine v1.0 APK](https://github.com/palshakya2006-tech/lifeline-app/releases/download/v1.0/app-release.apk)**
 
 To install:
 1. Download the APK file above
